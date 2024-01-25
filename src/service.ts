@@ -7,7 +7,7 @@ type APISearchResponseType = {
   image_base64: string;
 };
 
-class ServiceApi {
+export class ServiceApi {
   static async GET(endURL: string): Promise<any> {
     try {
       const response = await fetch(backBaseURL + endURL);

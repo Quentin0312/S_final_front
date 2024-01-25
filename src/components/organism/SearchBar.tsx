@@ -1,4 +1,5 @@
-import { JSXElement, createEffect, createSignal, on } from "solid-js";
+import { JSXElement, createEffect, createSignal } from "solid-js";
+import { ServiceApi } from "../../service";
 
 type OnChangeInputType = Event & {
   currentTarget: HTMLInputElement;
@@ -37,6 +38,7 @@ export function SearchBar(): JSXElement {
 
   return (
     <>
+      {/* TODO: Put in css file */}
       <div class="flex">
         {/* Make SearchBarKeyWordsInputs.tsx */}
         <div>
