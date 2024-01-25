@@ -1,5 +1,5 @@
-import { JSXElement, createEffect, createSignal } from "solid-js";
-import { ServiceApi } from "../../service";
+import { For, JSXElement, Setter, createSignal } from "solid-js";
+import { SearchService } from "../../_services/search.service";
 
 type OnChangeInputType = Event & {
   currentTarget: HTMLInputElement;
@@ -11,29 +11,34 @@ type OnChangeSelectType = Event & {
   target: HTMLSelectElement;
 };
 
+type SearchBarPropsType = {
+  setImagesToDisplay: Setter<string[]>;
+};
+
 // TODO: Create molecules and atoms files
-export function SearchBar(): JSXElement {
+// TODO: Setup "tags" system to use multiple keywords
+export function SearchBar(props: SearchBarPropsType): JSXElement {
   const [categories, setCategories] = createSignal<number[]>([]);
-  const [keyWord, setKeyWord] = createSignal<string>(""); // Update to use a list of keyword
-  const [selectedCategory, setSelectedCategory] = createSignal<number>();
+  const [keyWord, setKeyWord] = createSignal<string>(""); // TODO: Update to use a list of keyword
+  const [selectedCategory, setSelectedCategory] = createSignal<number>(-1);
 
-  createEffect(() => {
-    /* React on keyWord() and selectedCategory() changes */
-  });
-
+  // TODO: Adapt to work with multiple key_words
   async function onChangeKeyWords(e: OnChangeInputType) {
     const keyWordValue = e.target.value;
     setKeyWord(keyWordValue);
     // Display only available category in selectbox
-    const rawCategoriesLinked: number[] = await ServiceApi.getCategoriesLinked(
-      keyWordValue
-    );
-    setCategories(rawCategoriesLinked);
-    console.log("Categories linked:" + rawCategoriesLinked);
+    const response = await SearchService.search([keyWordValue], -1);
+    setCategories(response.categories);
+    props.setImagesToDisplay(response.list_image_base64);
   }
 
-  async function onChangeCategories(e: OnChangeSelectType) {
-    console.log("TODO");
+  async function onChangeCategory(e: OnChangeSelectType) {
+    setSelectedCategory(Number(e.target.value));
+    const response = await SearchService.search(
+      [keyWord()],
+      selectedCategory()
+    );
+    props.setImagesToDisplay(response.list_image_base64);
   }
 
   return (
@@ -52,12 +57,12 @@ export function SearchBar(): JSXElement {
         </div>
         {/* Make SearchBarCategoriesSelect */}
         <div>
-          <select
-            id="categories"
-            name="categories"
-            onChange={onChangeCategories}
-          >
-            <option value="">Veuillez selectionner une catégorie</option>
+          <select id="categories" name="categories" onChange={onChangeCategory}>
+            <option value={-1}>Veuillez selectionner une catégorie</option>
+            <For each={categories()}>
+              {/* TODO: Display category name */}
+              {(category) => <option value={category}>{category}</option>}
+            </For>
           </select>
         </div>
       </div>
