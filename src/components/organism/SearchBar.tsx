@@ -37,7 +37,7 @@ export function SearchBar(): JSXElement {
 
   return (
     <>
-      <div>
+      <div class="flex">
         {/* Make SearchBarKeyWordsInputs.tsx */}
         <div>
           <label for="keyword">Entrez un mots clés:</label>
@@ -50,7 +50,6 @@ export function SearchBar(): JSXElement {
         </div>
         {/* Make SearchBarCategoriesSelect */}
         <div>
-          <label for="categories">Entrez un mots clés:</label>
           <select
             id="categories"
             name="categories"
