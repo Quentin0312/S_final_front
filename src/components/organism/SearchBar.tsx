@@ -1,10 +1,7 @@
 import { For, JSXElement, Setter, createSignal } from "solid-js";
 import { SearchService } from "../../_services/search.service";
-
-type OnChangeInputType = Event & {
-  currentTarget: HTMLInputElement;
-  target: HTMLInputElement;
-};
+import { SearchBarUtils } from "../../utils/SearchBar.utils";
+import { SearchBarKeyWordsInputs } from "../molecule/SearchBarKeyWordsInputs";
 
 type OnChangeSelectType = Event & {
   currentTarget: HTMLSelectElement;
@@ -22,16 +19,6 @@ export function SearchBar(props: SearchBarPropsType): JSXElement {
   const [keyWord, setKeyWord] = createSignal<string>(""); // TODO: Update to use a list of keyword
   const [selectedCategory, setSelectedCategory] = createSignal<number>(-1);
 
-  // TODO: Adapt to work with multiple key_words
-  async function onChangeKeyWords(e: OnChangeInputType) {
-    const keyWordValue = e.target.value;
-    setKeyWord(keyWordValue);
-    // Display only available category in selectbox
-    const response = await SearchService.search([keyWordValue], -1);
-    setCategories(response.categories);
-    props.setImagesToDisplay(response.list_image_base64);
-  }
-
   async function onChangeCategory(e: OnChangeSelectType) {
     setSelectedCategory(Number(e.target.value));
     const response = await SearchService.search(
@@ -41,61 +28,15 @@ export function SearchBar(props: SearchBarPropsType): JSXElement {
     props.setImagesToDisplay(response.list_image_base64);
   }
 
-  enum CategoryNameEnum {
-    Meubles,
-    Electromenager,
-    Multimédia,
-    Exterieur,
-    Papeterie,
-    Telephone,
-    Informatique,
-    GrandeDistribution,
-    Bricolage,
-    Culture,
-    Sport,
-    Bebe,
-    BienEtre,
-    Vehicule,
-    Jouets,
-  }
-
-  // TODO: Put in utils AND CLEAN
-  function getCategoryName(idCategory: CategoryNameEnum) {
-    const dict_mapping = {
-      0: "Meubles",
-      1: "Électroménager",
-      2: "Multimédia",
-      3: "Exterieur",
-      4: "Papeterie",
-      5: "Téléphone",
-      6: "Informatique",
-      7: "Grande distribution",
-      8: "Bricolage",
-      9: "Culture",
-      10: "Mode",
-      11: "Sport",
-      12: "Bébé",
-      13: "Bien être",
-      14: "Véhicule",
-      15: "Jouets",
-    };
-
-    return dict_mapping[idCategory];
-  }
   return (
     <>
       {/* TODO: Put in css file */}
       <div class="flex">
-        {/* Make SearchBarKeyWordsInputs.tsx */}
-        <div>
-          <label for="keyword">Entrez un mots clés:</label>
-          <input
-            type="text"
-            id="keyword"
-            name="keyword"
-            onChange={onChangeKeyWords}
-          />
-        </div>
+        <SearchBarKeyWordsInputs
+          setKeyWord={setKeyWord}
+          setCategories={setCategories}
+          setImagesToDisplay={props.setImagesToDisplay}
+        />
         {/* Make SearchBarCategoriesSelect */}
         <div>
           <select id="categories" name="categories" onChange={onChangeCategory}>
@@ -103,7 +44,9 @@ export function SearchBar(props: SearchBarPropsType): JSXElement {
             <For each={categories()}>
               {/* TODO: Display category name */}
               {(category) => (
-                <option value={category}>{getCategoryName(category)}</option>
+                <option value={category}>
+                  {SearchBarUtils.getCategoryName(category)}
+                </option>
               )}
             </For>
           </select>
