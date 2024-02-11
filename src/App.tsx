@@ -1,15 +1,14 @@
-import { createSignal, type Component, For } from "solid-js";
+import { createSignal, type Component, For, JSXElement } from "solid-js";
 import { SearchBar } from "./components/organism/SearchBar";
 
 // TODO: Changer le favicon
 
-const App: Component = () => {
-  const [imagesToDisplay, setImagesToDisplay] = createSignal([]);
+export function App(): JSXElement {
+  const [imagesToDisplay, setImagesToDisplay] = createSignal<string[]>([]);
   // TODO: Do not use raw value for img height
   // TODO: Mettre en place des alt
   return (
     <>
-      {/* @ts-ignore */}
       <SearchBar setImagesToDisplay={setImagesToDisplay} />
       {/* TODO: Create ImagesDisplay component */}
       <div class="flex">
@@ -21,6 +20,4 @@ const App: Component = () => {
       </div>
     </>
   );
-};
-
-export default App;
+}
