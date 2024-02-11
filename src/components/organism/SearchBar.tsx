@@ -1,6 +1,7 @@
 import { JSXElement, Setter, createSignal } from "solid-js";
 import { SearchBarKeyWordsInputs } from "../atom/SearchBarKeyWordsInputs";
 import { SearchBarCategoriesSelect } from "../atom/SearchBarCategoriesSelect";
+
 import "./SearchBar.css";
 
 type SearchBarPropsType = {
