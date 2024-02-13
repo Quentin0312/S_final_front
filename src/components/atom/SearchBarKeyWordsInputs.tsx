@@ -17,11 +17,11 @@ export function SearchBarKeyWordsInputs(
 ): JSXElement {
   return (
     <div>
-      <label for="keyword">Entrez un mots clés:</label>
       <input
         type="text"
         id="keyword"
         name="keyword"
+        placeholder="Entrez un mots clés"
         onChange={(e) =>
           onChangeKeyWords(
             e,

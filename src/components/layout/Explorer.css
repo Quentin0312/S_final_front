@@ -1,0 +1,3 @@
+#explorer-layout {
+  @apply h-[90vh] flex flex-col items-center;
+}
