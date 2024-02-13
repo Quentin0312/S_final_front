@@ -24,8 +24,9 @@ export function SearchBarCategoriesSelect(
         onChange={(e) =>
           onChangeCategory(e, props.getKeyWord, props.setImagesToDisplay)
         }
+        disabled={props.getCategories().length == 0}
       >
-        <option value={-1}>Veuillez selectionner une catégorie</option>
+        <option value={-1}>Tous</option>
         <For each={props.getCategories()}>
           {(category) => (
             <option value={category}>
