@@ -3,6 +3,13 @@ import { ImagesDisplay } from "../organism/ImagesDisplay";
 import { SearchBar } from "../organism/SearchBar";
 
 export function Explorer(): JSXElement {
+  // TODO: Make it contain dates ! Use this type =>
+  type ImageToDisplayType = {
+    image: string;
+    startDate: string;
+    endDate: string;
+  };
+
   const [imagesToDisplay, setImagesToDisplay] = createSignal<string[]>([]);
 
   return (
