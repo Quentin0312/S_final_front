@@ -22,7 +22,7 @@ export function SearchBarKeyWordsInputs(
         type="text"
         id="keyword"
         name="keyword"
-        placeholder="Entrez un mots clés"
+        placeholder="Entrez un mot-clé"
         onChange={(e) =>
           onChangeKeyWords(
             e,

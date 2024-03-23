@@ -1,5 +1,6 @@
 import { Accessor, For, JSXElement } from "solid-js";
 import "./ImagesDisplay.css";
+import { ImageDisplayItem } from "../molecule/ImageDisplayItem";
 
 interface ImagesDisplayProps {
   getImagesToDisplay: Accessor<string[]>;
@@ -11,9 +12,7 @@ export function ImagesDisplay(props: ImagesDisplayProps): JSXElement {
   return (
     <div id="images-display">
       <For each={props.getImagesToDisplay()}>
-        {(image) => (
-          <img src={`data:image/jpeg;base64,${image}`} width={"300px"}></img>
-        )}
+        {(image) => <ImageDisplayItem image={image} />}
       </For>
     </div>
   );
