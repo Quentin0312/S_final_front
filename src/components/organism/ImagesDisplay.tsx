@@ -10,7 +10,10 @@ interface ImagesDisplayProps {
 // TODO: Mettre en place des alt
 export function ImagesDisplay(props: ImagesDisplayProps): JSXElement {
   return (
-    <div id="images-display">
+    <div
+      id="images-display"
+      class={props.getImagesToDisplay().length != 0 ? "overflow-x-scroll" : ""}
+    >
       <For each={props.getImagesToDisplay()}>
         {(image) => <ImageDisplayItem image={image} />}
       </For>
