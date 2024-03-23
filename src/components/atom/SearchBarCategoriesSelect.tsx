@@ -9,7 +9,7 @@ type OnChangeSelectType = Event & {
 
 interface SearchBarCategoriesSelectProps {
   getCategories: Accessor<number[]>;
-  getKeyWord: Accessor<string>;
+  getKeyWords: Accessor<string[]>;
   setImagesToDisplay: Setter<string[]>;
 }
 
@@ -22,7 +22,7 @@ export function SearchBarCategoriesSelect(
         id="categories"
         name="categories"
         onChange={(e) =>
-          onChangeCategory(e, props.getKeyWord, props.setImagesToDisplay)
+          onChangeCategory(e, props.getKeyWords, props.setImagesToDisplay)
         }
         disabled={props.getCategories().length == 0}
       >
@@ -41,11 +41,11 @@ export function SearchBarCategoriesSelect(
 
 async function onChangeCategory(
   e: OnChangeSelectType,
-  keyWord: Accessor<string>,
+  getKeyWords: Accessor<string[]>,
   setImagesToDisplay: Setter<string[]>
 ) {
   const response = await SearchService.search(
-    [keyWord()],
+    getKeyWords(),
     Number(e.target.value)
   );
 

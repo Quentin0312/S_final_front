@@ -11,18 +11,19 @@ type SearchBarPropsType = {
 // TODO: Setup "tags" system to use multiple keywords
 export function SearchBar(props: SearchBarPropsType): JSXElement {
   const [categories, setCategories] = createSignal<number[]>([]);
-  const [keyWord, setKeyWord] = createSignal<string>(""); // TODO: Update to use a list of keyword
+  const [keyWords, setKeyWords] = createSignal<string[]>([]);
 
   return (
     <div id="search-bar">
       <SearchBarKeyWordsInputs
-        setKeyWord={setKeyWord}
+        setKeyWords={setKeyWords}
+        getKeyWords={keyWords}
         setCategories={setCategories}
         setImagesToDisplay={props.setImagesToDisplay}
       />
       <SearchBarCategoriesSelect
         getCategories={categories}
-        getKeyWord={keyWord}
+        getKeyWords={keyWords}
         setImagesToDisplay={props.setImagesToDisplay}
       />
     </div>

@@ -1,4 +1,4 @@
-import { JSXElement, Setter } from "solid-js";
+import { Accessor, JSXElement, Setter } from "solid-js";
 import { SearchService } from "../../_services/search.service";
 
 type OnChangeInputType = Event & {
@@ -7,7 +7,8 @@ type OnChangeInputType = Event & {
 };
 
 interface SearchBarKeyWordsInputsProps {
-  setKeyWord: Setter<string>;
+  setKeyWords: Setter<string[]>;
+  getKeyWords: Accessor<string[]>;
   setCategories: Setter<number[]>;
   setImagesToDisplay: Setter<string[]>;
 }
@@ -25,7 +26,8 @@ export function SearchBarKeyWordsInputs(
         onChange={(e) =>
           onChangeKeyWords(
             e,
-            props.setKeyWord,
+            props.setKeyWords,
+            props.getKeyWords,
             props.setCategories,
             props.setImagesToDisplay
           )
@@ -38,14 +40,31 @@ export function SearchBarKeyWordsInputs(
 // TODO: Adapt to work with multiple key_words
 async function onChangeKeyWords(
   e: OnChangeInputType,
-  setKeyWord: Setter<string>,
+  setKeyWords: Setter<string[]>,
+  getKeyWords: Accessor<string[]>,
   setCategories: Setter<number[]>,
   setImagesToDisplay: Setter<string[]>
-) {
+): Promise<void> {
   const keyWordValue = e.target.value;
-  setKeyWord(keyWordValue);
+  if (keyWordValue == "") return;
+
+  // Add new keyWord to keyWords()
+  setKeyWords((prev) => {
+    const keyWords = [...prev];
+    keyWords.push(keyWordValue);
+    return keyWords;
+  });
+  console.log("keywords =>", getKeyWords());
+
+  // Send keyWords to back
+  const response = await SearchService.search(getKeyWords(), -1);
+
   // Display only available category in selectbox
-  const response = await SearchService.search([keyWordValue], -1);
   setCategories(response.categories);
+
+  // Display images
   setImagesToDisplay(response.list_image_base64);
+
+  // Reset input value
+  e.target.value = "";
 }
