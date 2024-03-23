@@ -1,8 +1,9 @@
-import { JSXElement, Setter, createSignal } from "solid-js";
+import { For, JSXElement, Setter, Show, createSignal } from "solid-js";
 import { SearchBarKeyWordsInputs } from "../atom/SearchBarKeyWordsInputs";
 import { SearchBarCategoriesSelect } from "../atom/SearchBarCategoriesSelect";
 
 import "./SearchBar.css";
+import { KeyWords } from "../molecule/KeyWords";
 
 type SearchBarPropsType = {
   setImagesToDisplay: Setter<string[]>;
@@ -21,6 +22,16 @@ export function SearchBar(props: SearchBarPropsType): JSXElement {
         setCategories={setCategories}
         setImagesToDisplay={props.setImagesToDisplay}
       />
+
+      <Show when={keyWords().length > 0}>
+        <KeyWords
+          getKeyWords={keyWords}
+          setKeyWords={setKeyWords}
+          setCategories={setCategories}
+          setImagesToDisplay={props.setImagesToDisplay}
+        />
+      </Show>
+
       <SearchBarCategoriesSelect
         getCategories={categories}
         getKeyWords={keyWords}

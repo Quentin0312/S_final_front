@@ -54,8 +54,8 @@ async function onChangeKeyWords(
     keyWords.push(keyWordValue);
     return keyWords;
   });
-  console.log("keywords =>", getKeyWords());
 
+  // TODO: Refactor
   // Send keyWords to back
   const response = await SearchService.search(getKeyWords(), -1);
 
