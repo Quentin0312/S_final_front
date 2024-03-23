@@ -15,28 +15,30 @@ export function SearchBar(props: SearchBarPropsType): JSXElement {
   const [keyWords, setKeyWords] = createSignal<string[]>([]);
 
   return (
-    <div id="search-bar">
-      <SearchBarKeyWordsInputs
-        setKeyWords={setKeyWords}
-        getKeyWords={keyWords}
-        setCategories={setCategories}
-        setImagesToDisplay={props.setImagesToDisplay}
-      />
-
-      <Show when={keyWords().length > 0}>
-        <KeyWords
-          getKeyWords={keyWords}
+    <div id="search-bar-container">
+      <div id="search-bar">
+        <SearchBarKeyWordsInputs
           setKeyWords={setKeyWords}
+          getKeyWords={keyWords}
           setCategories={setCategories}
           setImagesToDisplay={props.setImagesToDisplay}
         />
-      </Show>
 
-      <SearchBarCategoriesSelect
-        getCategories={categories}
-        getKeyWords={keyWords}
-        setImagesToDisplay={props.setImagesToDisplay}
-      />
+        <Show when={keyWords().length > 0}>
+          <KeyWords
+            getKeyWords={keyWords}
+            setKeyWords={setKeyWords}
+            setCategories={setCategories}
+            setImagesToDisplay={props.setImagesToDisplay}
+          />
+        </Show>
+
+        <SearchBarCategoriesSelect
+          getCategories={categories}
+          getKeyWords={keyWords}
+          setImagesToDisplay={props.setImagesToDisplay}
+        />
+      </div>
     </div>
   );
 }

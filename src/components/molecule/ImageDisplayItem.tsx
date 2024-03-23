@@ -3,8 +3,9 @@ import "./ImageDisplayItem.css";
 
 export function ImageDisplayItem(props: { image: string }): JSXElement {
   return (
-    <div class="image-display-item">
-      <img src={`data:image/jpeg;base64,${props.image}`} width={"300px"} />
+    <div>
+      <img src={`data:image/jpeg;base64,${props.image}`} />
+      <div>TEST</div>
     </div>
   );
 }
