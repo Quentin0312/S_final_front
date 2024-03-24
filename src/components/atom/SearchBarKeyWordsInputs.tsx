@@ -50,6 +50,11 @@ async function onChangeKeyWords(
 ): Promise<void> {
   const keyWordValue = e.target.value;
   if (keyWordValue == "") return;
+  if (getKeyWords().includes(keyWordValue)) {
+    // Reset input value
+    e.target.value = "";
+    return;
+  }
 
   // TODO: Refactor
   // Send keyWords to back
