@@ -27,22 +27,26 @@ export function ImageViewer(props: {
 
   return (
     <div id="modal" onclick={() => setImageToDisplayInModal()}>
-      <div>
-        {/* TODO: Externalie in another file */}
-        <div class="text-white">
-          Du {props.imageToDisplay.startDate} au {props.imageToDisplay.endDate}
-        </div>
-
-        {/* TODO: Afficher première page du catalog correspondant */}
+      <div class="flex items-center ml-10">
         <div>
-          <img src={`data:image/jpeg;base64,${firstImage()}`} />
-        </div>
+          {/* TODO: Afficher première page du catalog correspondant */}
+          <div>
+            <img src={`data:image/jpeg;base64,${firstImage()}`} />
+          </div>
+          {/* TODO: Externalie in another file */}
+          <div class="flex justify-center">
+            <div class="text-white">
+              Du {props.imageToDisplay.startDate} au{" "}
+              {props.imageToDisplay.endDate}
+            </div>
+          </div>
 
-        {/* TODO: Afficher dernière page du catalog correspondant */}
-        {/* <div class="text-white">
+          {/* TODO: Afficher dernière page du catalog correspondant */}
+          {/* <div class="text-white">
           IMage 2
           <img src={`data:image/jpeg;base64,${lastImage()}`} />
         </div> */}
+        </div>
       </div>
       <img
         class="modal-content"
