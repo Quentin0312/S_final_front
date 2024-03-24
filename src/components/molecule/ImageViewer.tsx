@@ -16,11 +16,9 @@ export function ImageViewer(props: {
   // const [lastImage, setLastImage] = createSignal("");
 
   onMount(async () => {
-    console.log("onMount");
     const response = await SearchService.getImportantImages(
       imageToDisplayInModal()?.idCatalog as string
     );
-    console.log("response", response);
     setFirstImage(response.first_image);
     // setLastImage(response.last_image);
   });

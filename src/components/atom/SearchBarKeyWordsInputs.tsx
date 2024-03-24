@@ -51,16 +51,19 @@ async function onChangeKeyWords(
   const keyWordValue = e.target.value;
   if (keyWordValue == "") return;
 
+  // TODO: Refactor
+  // Send keyWords to back
+  const response = await SearchService.search(
+    [...getKeyWords(), keyWordValue],
+    -1
+  );
+
   // Add new keyWord to keyWords()
   setKeyWords((prev) => {
     const keyWords = [...prev];
     keyWords.push(keyWordValue);
     return keyWords;
   });
-
-  // TODO: Refactor
-  // Send keyWords to back
-  const response = await SearchService.search(getKeyWords(), -1);
 
   // Display only available category in selectbox
   setCategories(response.categories);

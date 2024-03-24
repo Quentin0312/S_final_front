@@ -2,3 +2,8 @@ img {
   max-width: fit-content !important;
   height: 500px !important;
 }
+
+.image-display-item {
+  border: 1px solid;
+  border-left: 0px;
+}

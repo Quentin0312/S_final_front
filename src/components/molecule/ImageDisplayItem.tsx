@@ -17,7 +17,7 @@ export function ImageDisplayItem(props: {
   }
 
   return (
-    <div>
+    <div class="image-display-item">
       <img
         src={`data:image/jpeg;base64,${props.image.image}`}
         onClick={onClick}

@@ -10,10 +10,10 @@ type SearchBarPropsType = {
   setImagesToDisplay: Setter<ImageToDisplayType[]>;
 };
 
+export const [keyWords, setKeyWords] = createSignal<string[]>([]);
 // TODO: Setup "tags" system to use multiple keywords
 export function SearchBar(props: SearchBarPropsType): JSXElement {
   const [categories, setCategories] = createSignal<number[]>([]);
-  const [keyWords, setKeyWords] = createSignal<string[]>([]);
 
   return (
     <div id="search-bar-container">
