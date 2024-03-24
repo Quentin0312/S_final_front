@@ -1,13 +1,16 @@
 import { Accessor, JSXElement, Setter } from "solid-js";
 import "./KeyWord.css";
-import { SearchService } from "../../_services/search.service";
+import {
+  ImageToDisplayType,
+  SearchService,
+} from "../../_services/search.service";
 
 type KeyWordProps = {
   keyWord: string;
   setKeyWords: Setter<string[]>;
   getKeyWords: Accessor<string[]>;
   setCategories: Setter<number[]>;
-  setImagesToDisplay: Setter<string[]>;
+  setImagesToDisplay: Setter<ImageToDisplayType[]>;
 };
 
 export function KeyWord(props: KeyWordProps): JSXElement {
@@ -34,7 +37,7 @@ async function onClick(
   setKeyWords: Setter<string[]>,
   getKeyWords: Accessor<string[]>,
   setCategories: Setter<number[]>,
-  setImagesToDisplay: Setter<string[]>
+  setImagesToDisplay: Setter<ImageToDisplayType[]>
 ): Promise<void> {
   // Remove targetKeyWord from keyWords()
   setKeyWords((prev) => {

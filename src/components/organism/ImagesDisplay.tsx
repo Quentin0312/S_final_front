@@ -1,9 +1,10 @@
 import { Accessor, For, JSXElement } from "solid-js";
 import "./ImagesDisplay.css";
 import { ImageDisplayItem } from "../molecule/ImageDisplayItem";
+import { ImageToDisplayType } from "../../_services/search.service";
 
 interface ImagesDisplayProps {
-  getImagesToDisplay: Accessor<string[]>;
+  getImagesToDisplay: Accessor<ImageToDisplayType[]>;
 }
 
 // TODO: Do not use raw value for img height

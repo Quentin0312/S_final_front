@@ -4,9 +4,10 @@ import { SearchBarCategoriesSelect } from "../atom/SearchBarCategoriesSelect";
 
 import "./SearchBar.css";
 import { KeyWords } from "../molecule/KeyWords";
+import { ImageToDisplayType } from "../../_services/search.service";
 
 type SearchBarPropsType = {
-  setImagesToDisplay: Setter<string[]>;
+  setImagesToDisplay: Setter<ImageToDisplayType[]>;
 };
 
 // TODO: Setup "tags" system to use multiple keywords

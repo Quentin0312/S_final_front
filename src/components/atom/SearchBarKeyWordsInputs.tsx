@@ -1,5 +1,8 @@
 import { Accessor, JSXElement, Setter } from "solid-js";
-import { SearchService } from "../../_services/search.service";
+import {
+  ImageToDisplayType,
+  SearchService,
+} from "../../_services/search.service";
 
 type OnChangeInputType = Event & {
   currentTarget: HTMLInputElement;
@@ -10,7 +13,7 @@ interface SearchBarKeyWordsInputsProps {
   setKeyWords: Setter<string[]>;
   getKeyWords: Accessor<string[]>;
   setCategories: Setter<number[]>;
-  setImagesToDisplay: Setter<string[]>;
+  setImagesToDisplay: Setter<ImageToDisplayType[]>;
 }
 
 export function SearchBarKeyWordsInputs(
@@ -43,7 +46,7 @@ async function onChangeKeyWords(
   setKeyWords: Setter<string[]>,
   getKeyWords: Accessor<string[]>,
   setCategories: Setter<number[]>,
-  setImagesToDisplay: Setter<string[]>
+  setImagesToDisplay: Setter<ImageToDisplayType[]>
 ): Promise<void> {
   const keyWordValue = e.target.value;
   if (keyWordValue == "") return;

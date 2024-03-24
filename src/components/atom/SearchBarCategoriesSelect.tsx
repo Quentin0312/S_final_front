@@ -1,6 +1,9 @@
 import { Accessor, For, JSXElement, Setter, createSignal } from "solid-js";
 import { SearchBarUtils } from "../../utils/SearchBar.utils";
-import { SearchService } from "../../_services/search.service";
+import {
+  ImageToDisplayType,
+  SearchService,
+} from "../../_services/search.service";
 
 type OnChangeSelectType = Event & {
   currentTarget: HTMLSelectElement;
@@ -10,7 +13,7 @@ type OnChangeSelectType = Event & {
 interface SearchBarCategoriesSelectProps {
   getCategories: Accessor<number[]>;
   getKeyWords: Accessor<string[]>;
-  setImagesToDisplay: Setter<string[]>;
+  setImagesToDisplay: Setter<ImageToDisplayType[]>;
 }
 
 export function SearchBarCategoriesSelect(
@@ -42,7 +45,7 @@ export function SearchBarCategoriesSelect(
 async function onChangeCategory(
   e: OnChangeSelectType,
   getKeyWords: Accessor<string[]>,
-  setImagesToDisplay: Setter<string[]>
+  setImagesToDisplay: Setter<ImageToDisplayType[]>
 ) {
   const response = await SearchService.search(
     getKeyWords(),

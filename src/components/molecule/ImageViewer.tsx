@@ -1,9 +1,7 @@
 import { JSXElement } from "solid-js";
-import {
-  ImageToDisplayType,
-  setImageToDisplayInModal,
-} from "../layout/Explorer";
+import { setImageToDisplayInModal } from "../layout/Explorer";
 import "./ImageViewer.css";
+import { ImageToDisplayType } from "../../_services/search.service";
 
 export function ImageViewer(props: {
   imageToDisplay: ImageToDisplayType;

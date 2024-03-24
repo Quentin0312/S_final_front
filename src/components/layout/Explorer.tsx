@@ -1,18 +1,15 @@
 import { JSXElement, createSignal } from "solid-js";
 import { ImagesDisplay } from "../organism/ImagesDisplay";
 import { SearchBar } from "../organism/SearchBar";
+import { ImageToDisplayType } from "../../_services/search.service";
 
-// TODO: Make it contain dates ! Use this type =>
-export type ImageToDisplayType = {
-  image: string;
-  startDate: string;
-  endDate: string;
-};
 export const [imageToDisplayInModal, setImageToDisplayInModal] =
   createSignal<ImageToDisplayType>();
 
 export function Explorer(): JSXElement {
-  const [imagesToDisplay, setImagesToDisplay] = createSignal<string[]>([]);
+  const [imagesToDisplay, setImagesToDisplay] = createSignal<
+    ImageToDisplayType[]
+  >([]);
 
   return (
     <div>
