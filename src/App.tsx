@@ -1,6 +1,11 @@
-import { JSXElement } from "solid-js";
+import { JSXElement, Show } from "solid-js";
 import { NavBar } from "./components/organism/NavBar";
-import { Explorer } from "./components/layout/Explorer";
+import {
+  Explorer,
+  ImageToDisplayType,
+  imageToDisplayInModal,
+} from "./components/layout/Explorer";
+import { ImageViewer } from "./components/molecule/ImageViewer";
 
 // TODO: Changer le favicon
 
@@ -9,6 +14,12 @@ export function App(): JSXElement {
     <>
       <NavBar />
       <Explorer />
+
+      <Show when={imageToDisplayInModal()}>
+        <ImageViewer
+          imageToDisplay={imageToDisplayInModal() as ImageToDisplayType}
+        />
+      </Show>
     </>
   );
 }
