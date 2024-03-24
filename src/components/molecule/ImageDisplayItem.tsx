@@ -12,9 +12,9 @@ export function ImageDisplayItem(props: {
       image: props.image.image,
       startDate: props.image.startDate,
       endDate: props.image.endDate,
+      idCatalog: props.image.idCatalog,
     });
   }
-  console.log(props.image);
 
   return (
     <div>

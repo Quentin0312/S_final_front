@@ -1,11 +1,30 @@
-import { JSXElement } from "solid-js";
-import { setImageToDisplayInModal } from "../layout/Explorer";
+import { JSXElement, createSignal, onMount } from "solid-js";
+import {
+  imageToDisplayInModal,
+  setImageToDisplayInModal,
+} from "../layout/Explorer";
 import "./ImageViewer.css";
-import { ImageToDisplayType } from "../../_services/search.service";
+import {
+  ImageToDisplayType,
+  SearchService,
+} from "../../_services/search.service";
 
 export function ImageViewer(props: {
   imageToDisplay: ImageToDisplayType;
 }): JSXElement {
+  const [firstImage, setFirstImage] = createSignal("");
+  // const [lastImage, setLastImage] = createSignal("");
+
+  onMount(async () => {
+    console.log("onMount");
+    const response = await SearchService.getImportantImages(
+      imageToDisplayInModal()?.idCatalog as string
+    );
+    console.log("response", response);
+    setFirstImage(response.first_image);
+    // setLastImage(response.last_image);
+  });
+
   return (
     <div id="modal" onclick={() => setImageToDisplayInModal()}>
       <div>
@@ -15,10 +34,15 @@ export function ImageViewer(props: {
         </div>
 
         {/* TODO: Afficher première page du catalog correspondant */}
-        <div class="text-white">IMage 1</div>
+        <div>
+          <img src={`data:image/jpeg;base64,${firstImage()}`} />
+        </div>
 
         {/* TODO: Afficher dernière page du catalog correspondant */}
-        <div class="text-white">IMage 2</div>
+        {/* <div class="text-white">
+          IMage 2
+          <img src={`data:image/jpeg;base64,${lastImage()}`} />
+        </div> */}
       </div>
       <img
         class="modal-content"
